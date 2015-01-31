@@ -1,9 +1,9 @@
 0 info it worked if it ends with ok
-1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', '-g' ]
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', '-g', 'oauth' ]
 2 info using npm@1.4.28
 3 info using node@v0.10.35
-4 verbose cache add [ '.', null ]
-5 verbose cache add name=undefined spec="." args=[".",null]
+4 verbose cache add [ 'oauth', null ]
+5 verbose cache add name=undefined spec="oauth" args=["oauth",null]
 6 verbose parsed url { protocol: null,
 6 verbose parsed url   slashes: null,
 6 verbose parsed url   auth: null,
@@ -13,76 +13,144 @@
 6 verbose parsed url   hash: null,
 6 verbose parsed url   search: null,
 6 verbose parsed url   query: null,
-6 verbose parsed url   pathname: '.',
-6 verbose parsed url   path: '.',
-6 verbose parsed url   href: '.' }
-7 silly lockFile 3a52ce78- .
-8 verbose lock . /Users/Dongminator/.npm/3a52ce78-.lock
-9 verbose tar pack [ '/Users/Dongminator/.npm/FTD/0.0.1/package.tgz', '.' ]
-10 verbose tarball /Users/Dongminator/.npm/FTD/0.0.1/package.tgz
-11 verbose folder .
-12 info prepublish FTD@0.0.1
-13 silly lockFile 1f1177db-tar tar://.
-14 verbose lock tar://. /Users/Dongminator/.npm/1f1177db-tar.lock
-15 silly lockFile eaa62abd-inator-npm-FTD-0-0-1-package-tgz tar:///Users/Dongminator/.npm/FTD/0.0.1/package.tgz
-16 verbose lock tar:///Users/Dongminator/.npm/FTD/0.0.1/package.tgz /Users/Dongminator/.npm/eaa62abd-inator-npm-FTD-0-0-1-package-tgz.lock
-17 silly lockFile 1f1177db-tar tar://.
-18 silly lockFile 1f1177db-tar tar://.
-19 silly lockFile eaa62abd-inator-npm-FTD-0-0-1-package-tgz tar:///Users/Dongminator/.npm/FTD/0.0.1/package.tgz
-20 silly lockFile eaa62abd-inator-npm-FTD-0-0-1-package-tgz tar:///Users/Dongminator/.npm/FTD/0.0.1/package.tgz
-21 silly lockFile e0a479e2-ongminator-npm-FTD-0-0-1-package /Users/Dongminator/.npm/FTD/0.0.1/package
-22 verbose lock /Users/Dongminator/.npm/FTD/0.0.1/package /Users/Dongminator/.npm/e0a479e2-ongminator-npm-FTD-0-0-1-package.lock
-23 silly lockFile e0a479e2-ongminator-npm-FTD-0-0-1-package /Users/Dongminator/.npm/FTD/0.0.1/package
-24 silly lockFile e0a479e2-ongminator-npm-FTD-0-0-1-package /Users/Dongminator/.npm/FTD/0.0.1/package
-25 silly lockFile 3a52ce78- .
-26 silly lockFile 3a52ce78- .
-27 silly resolved [ { name: 'FTD',
-27 silly resolved     version: '0.0.1',
-27 silly resolved     dependencies: { oauth: '0.9.12', 'body-parser': '^1.11.0', express: '4.9.x' },
-27 silly resolved     engines: { node: '0.10.x' },
-27 silly resolved     readme: '# ftd\nFor the dream\n\n\n\ncurl -u "ftdapp@163.com:ftddev" -d \'status=abc&annotations=[{"type2":123}]\' "http://api.t.sina.com.cn/statuses/update.json?source=2348647833"',
-27 silly resolved     readmeFilename: 'README.md',
-27 silly resolved     gitHead: '48bfff26f3f700de4f2f35b03c1bc14c3d5bc9b3',
-27 silly resolved     description: 'For the dream',
-27 silly resolved     _id: 'FTD@0.0.1',
-27 silly resolved     scripts: {},
-27 silly resolved     _shasum: 'f56cb87b744eee657ef4a07ac3a512390537786f',
-27 silly resolved     _from: '.' } ]
-28 info install FTD@0.0.1 into /usr/local/lib
-29 info installOne FTD@0.0.1
-30 verbose lib/node_modules/FTD unbuild
-31 verbose tar unpack /Users/Dongminator/.npm/FTD/0.0.1/package.tgz
-32 silly lockFile d3f19c9c-r-usr-local-lib-node-modules-FTD tar:///usr/local/lib/node_modules/FTD
-33 verbose lock tar:///usr/local/lib/node_modules/FTD /Users/Dongminator/.npm/d3f19c9c-r-usr-local-lib-node-modules-FTD.lock
-34 silly lockFile eaa62abd-inator-npm-FTD-0-0-1-package-tgz tar:///Users/Dongminator/.npm/FTD/0.0.1/package.tgz
-35 verbose lock tar:///Users/Dongminator/.npm/FTD/0.0.1/package.tgz /Users/Dongminator/.npm/eaa62abd-inator-npm-FTD-0-0-1-package-tgz.lock
-36 silly gunzTarPerm modes [ '755', '644' ]
-37 error Error: EACCES, mkdir '/usr/local/lib/node_modules/FTD'
-37 error  { [Error: EACCES, mkdir '/usr/local/lib/node_modules/FTD']
-37 error   errno: 3,
-37 error   code: 'EACCES',
-37 error   path: '/usr/local/lib/node_modules/FTD',
-37 error   fstream_type: 'Directory',
-37 error   fstream_path: '/usr/local/lib/node_modules/FTD',
-37 error   fstream_class: 'DirWriter',
-37 error   fstream_stack:
-37 error    [ '/usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23',
-37 error      '/usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:46:53',
-37 error      'Object.oncomplete (fs.js:108:15)' ] }
-38 error Please try running this command again as root/Administrator.
-39 error System Darwin 14.0.0
-40 error command "node" "/usr/local/bin/npm" "install" "-g"
-41 error cwd /Users/Dongminator/Documents/workspace/WebApp/ftd
-42 error node -v v0.10.35
-43 error npm -v 1.4.28
-44 error path /usr/local/lib/node_modules/FTD
-45 error fstream_path /usr/local/lib/node_modules/FTD
-46 error fstream_type Directory
-47 error fstream_class DirWriter
-48 error code EACCES
-49 error errno 3
-50 error stack Error: EACCES, mkdir '/usr/local/lib/node_modules/FTD'
-51 error fstream_stack /usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23
-51 error fstream_stack /usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:46:53
-51 error fstream_stack Object.oncomplete (fs.js:108:15)
-52 verbose exit [ 3, true ]
+6 verbose parsed url   pathname: 'oauth',
+6 verbose parsed url   path: 'oauth',
+6 verbose parsed url   href: 'oauth' }
+7 silly lockFile b7e9a6e2-oauth oauth
+8 verbose lock oauth /Users/Dongminator/.npm/b7e9a6e2-oauth.lock
+9 silly lockFile b7e9a6e2-oauth oauth
+10 silly lockFile b7e9a6e2-oauth oauth
+11 verbose addNamed [ 'oauth', '' ]
+12 verbose addNamed [ null, '*' ]
+13 silly lockFile 5cd41bc6-oauth oauth@
+14 verbose lock oauth@ /Users/Dongminator/.npm/5cd41bc6-oauth.lock
+15 silly addNameRange { name: 'oauth', range: '*', hasData: false }
+16 verbose request where is /oauth
+17 verbose request registry https://registry.npmjs.org/
+18 verbose request id b6372ba53a6aa9c4
+19 verbose url raw /oauth
+20 verbose url resolving [ 'https://registry.npmjs.org/', './oauth' ]
+21 verbose url resolved https://registry.npmjs.org/oauth
+22 verbose request where is https://registry.npmjs.org/oauth
+23 info trying registry request attempt 1 at 05:40:41
+24 http GET https://registry.npmjs.org/oauth
+25 http 200 https://registry.npmjs.org/oauth
+26 silly registry.get cb [ 200,
+26 silly registry.get   { date: 'Sat, 31 Jan 2015 13:40:41 GMT',
+26 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+26 silly registry.get     etag: '"4WRLHMHHIKYJ8O8U8SSSRBUK2"',
+26 silly registry.get     'content-type': 'application/json',
+26 silly registry.get     'cache-control': 'max-age=60',
+26 silly registry.get     'content-length': '27391',
+26 silly registry.get     'accept-ranges': 'bytes',
+26 silly registry.get     via: '1.1 varnish',
+26 silly registry.get     age: '0',
+26 silly registry.get     'x-served-by': 'cache-sjc3126-SJC',
+26 silly registry.get     'x-cache': 'MISS',
+26 silly registry.get     'x-cache-hits': '0',
+26 silly registry.get     'x-timer': 'S1422711641.732504,VS0,VE163',
+26 silly registry.get     vary: 'Accept',
+26 silly registry.get     'keep-alive': 'timeout=10, max=50',
+26 silly registry.get     connection: 'Keep-Alive' } ]
+27 silly addNameRange number 2 { name: 'oauth', range: '*', hasData: true }
+28 silly addNameRange versions [ 'oauth',
+28 silly addNameRange   [ '0.7.4',
+28 silly addNameRange     '0.7.5',
+28 silly addNameRange     '0.7.6',
+28 silly addNameRange     '0.7.7',
+28 silly addNameRange     '0.8.0',
+28 silly addNameRange     '0.8.1',
+28 silly addNameRange     '0.8.2',
+28 silly addNameRange     '0.8.3',
+28 silly addNameRange     '0.8.4',
+28 silly addNameRange     '0.9.0',
+28 silly addNameRange     '0.9.1',
+28 silly addNameRange     '0.9.2',
+28 silly addNameRange     '0.9.3',
+28 silly addNameRange     '0.9.4',
+28 silly addNameRange     '0.9.5',
+28 silly addNameRange     '0.9.6',
+28 silly addNameRange     '0.9.7',
+28 silly addNameRange     '0.9.8',
+28 silly addNameRange     '0.9.9',
+28 silly addNameRange     '0.9.10',
+28 silly addNameRange     '0.9.11',
+28 silly addNameRange     '0.9.12' ] ]
+29 verbose addNamed [ 'oauth', '0.9.12' ]
+30 verbose addNamed [ '0.9.12', '0.9.12' ]
+31 silly lockFile 7dc731cf-oauth-0-9-12 oauth@0.9.12
+32 verbose lock oauth@0.9.12 /Users/Dongminator/.npm/7dc731cf-oauth-0-9-12.lock
+33 silly lockFile 73601615-npmjs-org-oauth-oauth-0-9-12-tgz https://registry.npmjs.org/oauth/-/oauth-0.9.12.tgz
+34 verbose lock https://registry.npmjs.org/oauth/-/oauth-0.9.12.tgz /Users/Dongminator/.npm/73601615-npmjs-org-oauth-oauth-0-9-12-tgz.lock
+35 verbose addRemoteTarball [ 'https://registry.npmjs.org/oauth/-/oauth-0.9.12.tgz',
+35 verbose addRemoteTarball   '77bbb77cc5d638fe9b1d111b33c0b2f90030e89c' ]
+36 info retry fetch attempt 1 at 05:40:42
+37 verbose fetch to= /var/folders/g0/gjzm5n1542jgsnhh1z8cwz8m0000gn/T/npm-2932-0VsUs7l8/registry.npmjs.org/oauth/-/oauth-0.9.12.tgz
+38 http GET https://registry.npmjs.org/oauth/-/oauth-0.9.12.tgz
+39 http 200 https://registry.npmjs.org/oauth/-/oauth-0.9.12.tgz
+40 silly lockFile 73601615-npmjs-org-oauth-oauth-0-9-12-tgz https://registry.npmjs.org/oauth/-/oauth-0.9.12.tgz
+41 silly lockFile 73601615-npmjs-org-oauth-oauth-0-9-12-tgz https://registry.npmjs.org/oauth/-/oauth-0.9.12.tgz
+42 silly lockFile 7dc731cf-oauth-0-9-12 oauth@0.9.12
+43 silly lockFile 7dc731cf-oauth-0-9-12 oauth@0.9.12
+44 silly lockFile 5cd41bc6-oauth oauth@
+45 silly lockFile 5cd41bc6-oauth oauth@
+46 silly resolved [ { name: 'oauth',
+46 silly resolved     description: 'Library for interacting with OAuth 1.0, 1.0A, 2 and Echo.  Provides simplified client access and allows for construction of more complex apis and OAuth providers.',
+46 silly resolved     version: '0.9.12',
+46 silly resolved     directories: { lib: './lib' },
+46 silly resolved     main: 'index.js',
+46 silly resolved     author: { name: 'Ciaran Jessup', email: 'ciaranj@gmail.com' },
+46 silly resolved     repository: { type: 'git', url: 'http://github.com/ciaranj/node-oauth.git' },
+46 silly resolved     devDependencies: { vows: '0.5.x' },
+46 silly resolved     scripts: { test: 'make test' },
+46 silly resolved     licenses: [ [Object] ],
+46 silly resolved     bugs: { url: 'https://github.com/ciaranj/node-oauth/issues' },
+46 silly resolved     homepage: 'https://github.com/ciaranj/node-oauth',
+46 silly resolved     _id: 'oauth@0.9.12',
+46 silly resolved     dist:
+46 silly resolved      { shasum: '77bbb77cc5d638fe9b1d111b33c0b2f90030e89c',
+46 silly resolved        tarball: 'http://registry.npmjs.org/oauth/-/oauth-0.9.12.tgz' },
+46 silly resolved     _from: 'oauth@',
+46 silly resolved     _npmVersion: '1.4.3',
+46 silly resolved     _npmUser: { name: 'ciaranj', email: 'ciaranj@gmail.com' },
+46 silly resolved     maintainers: [ [Object] ],
+46 silly resolved     _shasum: '77bbb77cc5d638fe9b1d111b33c0b2f90030e89c',
+46 silly resolved     _resolved: 'https://registry.npmjs.org/oauth/-/oauth-0.9.12.tgz' } ]
+47 info install oauth@0.9.12 into /usr/local/lib
+48 info installOne oauth@0.9.12
+49 verbose lib/node_modules/oauth unbuild
+50 verbose tar unpack /Users/Dongminator/.npm/oauth/0.9.12/package.tgz
+51 silly lockFile 5beabecc-usr-local-lib-node-modules-oauth tar:///usr/local/lib/node_modules/oauth
+52 verbose lock tar:///usr/local/lib/node_modules/oauth /Users/Dongminator/.npm/5beabecc-usr-local-lib-node-modules-oauth.lock
+53 silly lockFile bfa924f0-tor-npm-oauth-0-9-12-package-tgz tar:///Users/Dongminator/.npm/oauth/0.9.12/package.tgz
+54 verbose lock tar:///Users/Dongminator/.npm/oauth/0.9.12/package.tgz /Users/Dongminator/.npm/bfa924f0-tor-npm-oauth-0-9-12-package-tgz.lock
+55 silly gunzTarPerm modes [ '755', '644' ]
+56 error Error: EACCES, mkdir '/usr/local/lib/node_modules/oauth'
+56 error  { [Error: EACCES, mkdir '/usr/local/lib/node_modules/oauth']
+56 error   errno: 3,
+56 error   code: 'EACCES',
+56 error   path: '/usr/local/lib/node_modules/oauth',
+56 error   fstream_type: 'Directory',
+56 error   fstream_path: '/usr/local/lib/node_modules/oauth',
+56 error   fstream_class: 'DirWriter',
+56 error   fstream_stack:
+56 error    [ '/usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23',
+56 error      '/usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:46:53',
+56 error      'Object.oncomplete (fs.js:108:15)' ] }
+57 error Please try running this command again as root/Administrator.
+58 error System Darwin 14.0.0
+59 error command "node" "/usr/local/bin/npm" "install" "-g" "oauth"
+60 error cwd /Users/Dongminator/Documents/workspace/WebApp/ftd
+61 error node -v v0.10.35
+62 error npm -v 1.4.28
+63 error path /usr/local/lib/node_modules/oauth
+64 error fstream_path /usr/local/lib/node_modules/oauth
+65 error fstream_type Directory
+66 error fstream_class DirWriter
+67 error code EACCES
+68 error errno 3
+69 error stack Error: EACCES, mkdir '/usr/local/lib/node_modules/oauth'
+70 error fstream_stack /usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23
+70 error fstream_stack /usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:46:53
+70 error fstream_stack Object.oncomplete (fs.js:108:15)
+71 verbose exit [ 3, true ]
