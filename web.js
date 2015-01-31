@@ -107,8 +107,8 @@ app.get('/weibo_update', function(request, response) {
 });
 
 app.get('/weibo_callback', function(request, response) {
-//	var code = request.param('code');
-	var code = _WEIBO_CODE;
+	var code = request.param('code');
+//	var code = _WEIBO_CODE;
 	
 	var options = {
 			hostname: 'api.weibo.com',
