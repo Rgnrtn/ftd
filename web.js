@@ -7,8 +7,8 @@ var OAuth = require('oauth');
 
 
 
-var _TWITTER_CONSUMER_KEY = 'iZMzBv7QqGZans76OGPXYk7RJ';
-var _TWITTER_CONSUMER_SECRET = 'anViPMq28DiW7aMzUeoYLcZcmaOGL0PfUeayOnz4uKsDglNFoJ';
+var _TWITTER_CONSUMER_KEY = 'QCNjxwwnRY43ciBstZLqb2DTH';
+var _TWITTER_CONSUMER_SECRET = 'spj49aPazeWSafjHEedZwjm8VyDtwnbgahG7Y5PokHEeGvS4Xj';
 
 var _TWITTER_ACCESS_TOKEN = '81404737-dOUXh4oOjTnu3RJH1MeRSviEbuCCopNO53tfI0mTx';
 var _TWITTER_ACCESS_TOKEN_SECRET = 'zKUz6rwOqURPRckjvVkIWlYwlOUXsXshw9N4U9MXQsyaM';
@@ -44,7 +44,16 @@ app.use('/images', express.static('images'));
 
 
 app.get('/', function(request, response) {
-	response.sendfile(__dirname+'/index.html');
+	var weibo_code = request.param('code');
+	
+	if (weibo_code) {
+		response.sendfile(__dirname+'/index.html?code=');
+	} else {
+		response.sendfile(__dirname+'/index.html');
+	}
+
+	
+	
 });
 
 app.get('/weibo_login_home', function(request, response) {
@@ -132,7 +141,7 @@ app.get('/weibo_callback', function(request, response) {
 		    }
 
 		    // redirect to app home	    
-		    response.redirect('https://ftd.herokuapp.com/weibo_home?access_token=' + data['access_token']);
+		    response.redirect('/?access_token=' + data['access_token']);
 //		    var access_token = "2.00bFo2AGfagwYCc4a389cecf0YeBKE";
 		    response.end();
 		  });
