@@ -140,13 +140,13 @@
 	    });
 	  }
 	  
-	  function postMsg() {
+	  function postMsg(data) {
 	  		/* make the API call */
 		FB.api(
 		    "/me/feed",
 		    "POST",
 		    {
-		        "message": "This is a test message"
+		        "message": data
 		    },
 		    function (response) {
 		      if (response && !response.error) {
@@ -222,7 +222,9 @@
 							//$(this).append($(ui.draggable).clone());
 							if ($(this).attr('id')=='facebook')
 							{
-
+								alert(1);
+								alert($(ui.draggable).last().first().next().text());
+								getMsg();
 							}
   					}
 				});
@@ -402,9 +404,9 @@
 					<section class="4u objectDrop" id="twitter">
 						<section>
 							<div class="box objectDrag">
-								<a href="#" class="button-alt icon fa-twitter-square" id="twitter_name_1"></a>
+								<a href="#" class="button-alt icon fa-twitter-square" id="twitter_name_1">test messager</a>
 								<a href="" class="concwbrbltime icon fa-clock-o" id="twitter_time_1"></a>
-								<p id="twitter_content_1"></p>
+								<p id="twitter_content_1">test message</p>
 							</div>
 						</section>
 						<section>
