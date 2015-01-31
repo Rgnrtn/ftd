@@ -82,12 +82,11 @@
 	  function testAPI() {
 	    console.log('Welcome!  Fetching your information.... ');
 	    FB.api('/me/permissions', function(response) {
-	      //console.log('Successful login for: ' + response.name);
+	      console.log('Successful login for: ' + response.data);
 	      console.log(response);
-	      /*
 	      document.getElementById('status').innerHTML =
-	        'Thanks for logging in, ' + response.name + '!';
-	    	*/
+	        'Thanks for logging in, ' + response.data + '!';
+
 	    });
 	  }
 	  
@@ -152,6 +151,7 @@
 -->
 
 <fb:login-button scope="public_profile,email,publish_actions,read_stream" onlogin="checkLoginState();">
+
 </fb:login-button>
 
 <div id="status">
