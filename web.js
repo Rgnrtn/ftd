@@ -2,6 +2,7 @@ var express = require('express')
 var app = express();
 var http = require('http');
 var https = require('https');
+var OAuth= require('oauth').OAuth;
 
 var bodyParser = require('body-parser');
 
@@ -16,6 +17,17 @@ app.use('/js', express.static('js'));
 app.use('/css', express.static('css'));
 app.use('/fonts', express.static('fonts'));
 app.use('/images', express.static('images'));
+
+
+var oa = new OAuth(
+		"https://api.twitter.com/oauth/request_token",
+		"https://api.twitter.com/oauth/access_token",
+		"2bjc6UMsRz85YC4JIzYZ984nr",
+		"18xosis9MgvqRshLbmfroXvXHrdE97QoqHHYEq3fDx5EnZFRh9",
+		"1.0",
+		"https://localhost:5000/twitter_callback",
+		"HMAC-SHA1"
+);
 
 
 app.get('/', function(request, response) {
@@ -175,23 +187,66 @@ app.post('/facebook_token', function(request, response) {
 // Twitter login handlers
 
 app.get('/twitter_login', function(request, response) {
-	
-	
-	response.send("facebook login");
+	response.sendfile(__dirname+'/twitter_login.html');
 });
 
+app.get('/twitter_login1', function(request, response) {
+	
+	oa.getOAuthRequestToken(function(error, oauth_token, oauth_token_secret, results){
+		if (error) {
+			console.log(error);
+			res.send("yeah no. didn't work.")
+		}
+		else {
+			req.session.oauth = {};
+			req.session.oauth.token = oauth_token;
+			console.log('oauth.token: ' + req.session.oauth.token);
+			req.session.oauth.token_secret = oauth_token_secret;
+			console.log('oauth.token_secret: ' + req.session.oauth.token_secret);
+			res.redirect('https://twitter.com/oauth/authenticate?oauth_token='+oauth_token)
+	}
+	});
+});
+
+app.get('/twitter_callback', function(req, res, next){
+	if (req.session.oauth) {
+		req.session.oauth.verifier = req.query.oauth_verifier;
+		var oauth = req.session.oauth;
+
+		oa.getOAuthAccessToken(oauth.token,oauth.token_secret,oauth.verifier, 
+		function(error, oauth_access_token, oauth_access_token_secret, results){
+			if (error){
+				console.log(error);
+				res.send("yeah something broke.");
+			} else {
+				req.session.oauth.access_token = oauth_access_token;
+				req.session.oauth,access_token_secret = oauth_access_token_secret;
+				console.log(results);
+				res.send("worked. nice one.");
+			}
+		}
+		);
+	} else
+		next(new Error("you're not supposed to be here."))
+});
+
+
+
+
 /*
- * https://dev.twitter.com/docs/auth/application-only-auth 
- * Step 2: obtain a bearer token
+ * Get token
  */
-app.get('/twitter_login2', function(request, response){
+app.get('/twitter_login22', function(request, response){
 	var headers = { 
-		    'Authorization': 'Basic ' + credentials.base64,
-		    'Content-Type' : 'application/x-www-form-urlencoded;charset=UTF-8' 
+		    'Authorization': 'OAuth ' + "oauth_callback=" + '"http://ftd.herokuapp.com/twitter_callback"' + "," +
+		    		"oauth_consumer_key=" + '"2bjc6UMsRz85YC4JIzYZ984nr"' + "," +
+		    		"";
 	};
 	var options = {
 			  hostname: 'api.twitter.com',
-			  path: "/oauth2/token",
+//			  path: "/oauth2/token",
+			  path: "/oauth/request_token",
+			  
 			  method: 'POST',
 			  headers: headers
 	};
@@ -211,7 +266,7 @@ app.get('/twitter_login2', function(request, response){
  * twitter_login3 is the actual query. need to rename it to query or something else.
  * Search API: https://stream.twitter.com/1.1/statuses/filter.json
  */
-app.get('/twitter_login3', function(request, response){
+app.get('/twitter_login33', function(request, response){
 	var bearer_token = request.param('bearer_token');
 	var query_string = request.param('q');
 	
