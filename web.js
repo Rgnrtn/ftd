@@ -12,6 +12,11 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 })); 
 
+app.use('/js', express.static('js'));
+app.use('/css', express.static('css'));
+app.use('/fonts', express.static('fonts'));
+app.use('/images', express.static('images'));
+
 
 app.get('/', function(request, response) {
 	response.sendfile(__dirname+'/index1.html');
