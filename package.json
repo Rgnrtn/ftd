@@ -2,6 +2,8 @@
   "name": "FTD",
   "version": "0.0.1",
   "dependencies": {
+ 
+    "oauth": "0.9.12",
     "body-parser": "^1.11.0",
     "oauth": "0.9.5",
     "express": "4.9.x"
