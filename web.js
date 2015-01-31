@@ -2,7 +2,41 @@ var express = require('express')
 var app = express();
 var http = require('http');
 var https = require('https');
-var OAuth= require('oauth').OAuth;
+////var OAuth= require('oauth').OAuth;
+//
+//var OAuth = require('OAuth');
+//var oauth = new OAuth.OAuth(
+//      'https://api.twitter.com/oauth/request_token',
+//      'https://api.twitter.com/oauth/access_token',
+//      '2bjc6UMsRz85YC4JIzYZ984nr',
+//      '18xosis9MgvqRshLbmfroXvXHrdE97QoqHHYEq3fDx5EnZFRh9',
+//      '1.0A',
+//      'http://ftd.herokuapp.com/twitter_callback',
+//      'HMAC-SHA1'
+//);
+//    
+//oauth.get(
+//      'https://api.twitter.com/1.1/trends/place.json?id=23424977',
+//      '81404737-dOUXh4oOjTnu3RJH1MeRSviEbuCCopNO53tfI0mTx', 
+//      //you can get it at dev.twitter.com for your own apps
+//      'zKUz6rwOqURPRckjvVkIWlYwlOUXsXshw9N4U9MXQsyaM', 
+//      //you can get it at dev.twitter.com for your own apps
+//      function (e, data, res){
+//        if (e) console.error(e);        
+//        console.log(data);
+//      });    
+//
+//
+////var oa = new OAuth(
+////		"https://api.twitter.com/oauth/request_token",
+////		"https://api.twitter.com/oauth/access_token",
+////		"2bjc6UMsRz85YC4JIzYZ984nr",
+////		"18xosis9MgvqRshLbmfroXvXHrdE97QoqHHYEq3fDx5EnZFRh9",
+////		"1.0",
+////		"http://ftd.herokuapp.com/twitter_callback",
+////		"HMAC-SHA1"
+////);
+
 
 var bodyParser = require('body-parser');
 
@@ -18,16 +52,6 @@ app.use('/css', express.static('css'));
 app.use('/fonts', express.static('fonts'));
 app.use('/images', express.static('images'));
 
-
-var oa = new OAuth(
-		"https://api.twitter.com/oauth/request_token",
-		"https://api.twitter.com/oauth/access_token",
-		"2bjc6UMsRz85YC4JIzYZ984nr",
-		"18xosis9MgvqRshLbmfroXvXHrdE97QoqHHYEq3fDx5EnZFRh9",
-		"1.0",
-		"https://localhost:5000/twitter_callback",
-		"HMAC-SHA1"
-);
 
 
 app.get('/', function(request, response) {
@@ -191,102 +215,35 @@ app.get('/twitter_login', function(request, response) {
 });
 
 app.get('/twitter_login1', function(request, response) {
-	
-	oa.getOAuthRequestToken(function(error, oauth_token, oauth_token_secret, results){
-		if (error) {
-			console.log(error);
-			res.send("yeah no. didn't work.")
-		}
-		else {
-			req.session.oauth = {};
-			req.session.oauth.token = oauth_token;
-			console.log('oauth.token: ' + req.session.oauth.token);
-			req.session.oauth.token_secret = oauth_token_secret;
-			console.log('oauth.token_secret: ' + req.session.oauth.token_secret);
-			res.redirect('https://twitter.com/oauth/authenticate?oauth_token='+oauth_token)
-	}
-	});
-});
+	var auth = 'OAuth ' +
+			
+			'oauth_consumer_key="2bjc6UMsRz85YC4JIzYZ984nr",' +
+			'oauth_nonce="34acba8ee4f5bbd5a17dc9564bc75be3",' +
+			'oauth_signature="Z2Wj3hPsoRA9h2SDdaIuVTU0HxM%3D",' +
+			'oauth_signature_method="HMAC-SHA1",' +
+			'oauth_timestamp="1422701818",' +
+			'oauth_token="81404737-dOUXh4oOjTnu3RJH1MeRSviEbuCCopNO53tfI0mTx",' + 
+			'oauth_version="1.0"' ;
 
-app.get('/twitter_callback', function(req, res, next){
-	if (req.session.oauth) {
-		req.session.oauth.verifier = req.query.oauth_verifier;
-		var oauth = req.session.oauth;
-
-		oa.getOAuthAccessToken(oauth.token,oauth.token_secret,oauth.verifier, 
-		function(error, oauth_access_token, oauth_access_token_secret, results){
-			if (error){
-				console.log(error);
-				res.send("yeah something broke.");
-			} else {
-				req.session.oauth.access_token = oauth_access_token;
-				req.session.oauth,access_token_secret = oauth_access_token_secret;
-				console.log(results);
-				res.send("worked. nice one.");
-			}
-		}
-		);
-	} else
-		next(new Error("you're not supposed to be here."))
-});
-
-
-
-
-/*
- * Get token
- */
-app.get('/twitter_login22', function(request, response){
-	var headers = { 
-		    'Authorization': 'OAuth ' + "oauth_callback=" + '"http://ftd.herokuapp.com/twitter_callback"' + "," +
-		    		"oauth_consumer_key=" + '"2bjc6UMsRz85YC4JIzYZ984nr"' + "," +
-		    		"";
-	};
-	var options = {
-			  hostname: 'api.twitter.com',
-//			  path: "/oauth2/token",
-			  path: "/oauth/request_token",
-			  
-			  method: 'POST',
-			  headers: headers
-	};
-	
-	var req = https.request(options, function(res) {
-		res.on('data', function (chunk) {
-			response.send(chunk);
-		});
-	});
-	
-	req.write('grant_type=client_credentials');
-	req.end();
-});
-
-/*
- * Step 3: Authenticate API requests with the bearer token
- * twitter_login3 is the actual query. need to rename it to query or something else.
- * Search API: https://stream.twitter.com/1.1/statuses/filter.json
- */
-app.get('/twitter_login33', function(request, response){
-	var bearer_token = request.param('bearer_token');
-	var query_string = request.param('q');
-	
-	// !! Do not forget to add "Bearer " before bearer_token!!!
-	var headers = { 
-		    'Authorization': "Bearer " + bearer_token,
-	};
-	
 	var options = {
 			hostname: 'api.twitter.com',
-			path: '/1.1/search/tweets.json' + query_string, // query_string already has "?q="
+			path: '/1.1/statuses/home_timeline.json',
 			method: 'GET',
-			headers: headers
+			
+			headers : {
+				'Authorization': auth
+			}
 	};
+	
 	var body = "";
 	var req = https.request(options, function(res) { // res is IncomingMessage help: http://nodejs.org/api/http.html#http_http_incomingmessage
+
+		console.log('HEADERS: ' + JSON.stringify(req.getHeader("Authorization")));
 		// res.statusCode
 		res.setEncoding("utf8");
 		res.on('data', function (chunk) {// this happens multiple times! So need to use 'body' to collect all data
 			body += chunk;
+//			console.log(res.headers);
 		});
 		
 		var data="";
@@ -299,14 +256,57 @@ app.get('/twitter_login33', function(request, response){
 		    	return response.end('error: ' + er.message);
 		    }
 
-		    // write back response json
+		    // redirect to app home	    
 		    response.send(data);
 		    response.end();
 		  });
 	});
 	req.end();
+	
+	
+//	oa.getOAuthRequestToken(function(error, oauth_token, oauth_token_secret, results){
+//		if (error) {
+//			console.log(error);
+//			res.send("yeah no. didn't work.")
+//		}
+//		else {
+////			req.session.oauth = {};
+////			req.session.oauth.token = oauth_token;
+//			console.log('oauth.token: ' + oauth_token);
+////			req.session.oauth.token_secret = oauth_token_secret;
+//			console.log('oauth.token_secret: ' + oauth_token_secret);
+//			res.redirect('https://twitter.com/oauth/authenticate?oauth_token='+oauth_token)
+//	}
+//	});
+	
+	
 });
 
+app.get('/twitter_callback', function(req, res, next){
+////	if (req.session.oauth) {
+//		req.session.oauth.verifier = req.query.oauth_verifier;
+//		var oauth = req.session.oauth;
+//
+//		oa.getOAuthAccessToken(oauth.token,oauth.token_secret,oauth.verifier, 
+//		function(error, oauth_access_token, oauth_access_token_secret, results){
+//			if (error){
+//				console.log(error);
+//				res.send("yeah something broke.");
+//			} else {
+////				req.session.oauth.access_token = oauth_access_token;
+////				req.session.oauth,access_token_secret = oauth_access_token_secret;
+//				console.log(results);
+//				res.send("worked. nice one.");
+//			}
+//		}
+//		);
+////	} else
+////		next(new Error("you're not supposed to be here."))
+	
+	
+	console.log("calllllllbackkkk");
+	response.send("twitter login callback here!");
+});
 
 
 
