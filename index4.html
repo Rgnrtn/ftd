@@ -316,11 +316,18 @@ div#alert2
 	  			{
 	  				if (choice1)
 	  				{
-	  					postMsg($('#input1').val());
+						postMsg($('#input1').val());
 	  				}
 	  				if (choice3)
 	  				{
-	  					sendweibo($('#input1').val());
+	  					console.log("choice1 succeed.");
+	  					var url = '';
+	  					url = '/bing?text=' + $('#input1').val();
+	  					console.log(url);
+	  					$.get(url,function( data ) {
+	  						sendweibo(data);
+	  					});
+	  					
 	  				}
 	  			});
 				$(".objectDrag").draggable({helper:'clone'});  

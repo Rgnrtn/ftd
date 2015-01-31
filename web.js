@@ -249,13 +249,7 @@ app.get('/bing', function(request, response) {
 	//qstr += encodeURIComponent(qdata);
 	qstr += encodeURIComponent(qdata);
 	console.log("qstr: " + qstr);
-	/*
-	var options = {
-			hostname: 'api.justext.me',
-			path: qstr, // query_string already has "?q="
-			method: 'GET'
-	};
-	*/
+
 	var options = {
 			hostname: 'api.justext.me',
 			//path: qstr, // query_string already has "?q="
@@ -287,6 +281,7 @@ app.get('/bing', function(request, response) {
 		    // redirect to app home	   
 		    //response.redirect('/weibo_home?access_token=' + data['access_token'] + "&code=" + code);
 //		    var access_token = "2.00Ut6lRBfagwYC071b2f7df209COpI";
+		    console.log(data);
 		    response.send(data);
 		    response.end();
 		  });
