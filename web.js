@@ -14,7 +14,7 @@ var _TWITTER_ACCESS_TOKEN = '81404737-dOUXh4oOjTnu3RJH1MeRSviEbuCCopNO53tfI0mTx'
 var _TWITTER_ACCESS_TOKEN_SECRET = 'zKUz6rwOqURPRckjvVkIWlYwlOUXsXshw9N4U9MXQsyaM';
 
 
-var _WEIBO_CODE ="";
+var _WEIBO_CODE ="c8cfe26cd92d2a40ab81214e389f2abd";
 var _WEIBO_ACCESS_TOKEN = "2.00Ut6lRBfagwYC071b2f7df209COpI";
 
 
@@ -107,7 +107,8 @@ app.get('/weibo_update', function(request, response) {
 });
 
 app.get('/weibo_callback', function(request, response) {
-	var code = request.param('code');
+//	var code = request.param('code');
+	var code = _WEIBO_CODE;
 	
 	var options = {
 			hostname: 'api.weibo.com',
