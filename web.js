@@ -59,7 +59,7 @@ app.get('/weibo_callback', function(request, response) {
 	});
 	req.end();
 	
-	response.send("user code is " + code);
+//	response.send("user code is " + code);
 });
 
 app.get('/weibo_access_token_success', function(request, response) {
