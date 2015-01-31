@@ -83,6 +83,15 @@ app.get('/facebook_login', function(request, response) {
 });
 
 
+app.get('/facebook_login1', function(request, response) {
+	
+	
+	response.send("facebook login1");
+});
+
+
+
+
 
 
 var port = process.env.PORT || 5000;
