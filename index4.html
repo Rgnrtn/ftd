@@ -235,9 +235,9 @@ div#alert2
 		    }
 		);
 	  }
-	  function sendweibo(data)
+	  function sendweibo(text)
 	  {
-	  	$.post( "/weibo_update",{"text":data});
+	  	$.getJSON( "/weibo_update?text=" + text);
 	  	$.getJSON( "/weibo_home?access_token=2.00bFo2AGfagwYCc4a389cecf0YeBKE",function( data ) {
 					$('#weibo_name_1').text(data["statuses"][0]["user"]["name"]);
  					$('#weibo_name_2').text(data["statuses"][1]["user"]["name"]);
