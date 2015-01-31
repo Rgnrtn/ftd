@@ -4,15 +4,24 @@ var http = require('http');
 var https = require('https');
 
 var OAuth = require('oauth');
+
+
+
+var _TWITTER_CONSUMER_KEY = 'iZMzBv7QqGZans76OGPXYk7RJ';
+var _TWITTER_CONSUMER_SECRET = 'anViPMq28DiW7aMzUeoYLcZcmaOGL0PfUeayOnz4uKsDglNFoJ';
+
+var _TWITTER_ACCESS_TOKEN = '81404737-dOUXh4oOjTnu3RJH1MeRSviEbuCCopNO53tfI0mTx';
+var _TWITTER_ACCESS_TOKEN_SECRET = 'zKUz6rwOqURPRckjvVkIWlYwlOUXsXshw9N4U9MXQsyaM';
 var oauth = new OAuth.OAuth(
 	      'https://api.twitter.com/oauth/request_token',
 	      'https://api.twitter.com/oauth/access_token',
-	      '2bjc6UMsRz85YC4JIzYZ984nr',
-	      '18xosis9MgvqRshLbmfroXvXHrdE97QoqHHYEq3fDx5EnZFRh9',
+	      _TWITTER_CONSUMER_KEY,
+	      _TWITTER_CONSUMER_SECRET,
 	      '1.0A',
 	      null,
 	      'HMAC-SHA1'
 );
+
 
 
 
@@ -124,7 +133,7 @@ app.get('/weibo_callback', function(request, response) {
 
 		    // redirect to app home	    
 		    response.redirect('https://ftd.herokuapp.com/weibo_home?access_token=' + data['access_token']);
-		    var access_token = "2.00bFo2AGfagwYCc4a389cecf0YeBKE";
+//		    var access_token = "2.00bFo2AGfagwYCc4a389cecf0YeBKE";
 		    response.end();
 		  });
 	});
@@ -194,147 +203,31 @@ app.get('/twitter_login', function(request, response) {
 	response.sendfile(__dirname+'/twitter_login.html');
 });
 
-app.get('/twitter_login1', function(request, response) {
-	var auth = 'OAuth ' +
-			
-			'oauth_consumer_key="2bjc6UMsRz85YC4JIzYZ984nr",' +
-			'oauth_nonce="34acba8ee4f5bbd5a17dc9564bc75be3",' +
-			'oauth_signature="Z2Wj3hPsoRA9h2SDdaIuVTU0HxM%3D",' +
-			'oauth_signature_method="HMAC-SHA1",' +
-			'oauth_timestamp="1422701818",' +
-			'oauth_token="81404737-dOUXh4oOjTnu3RJH1MeRSviEbuCCopNO53tfI0mTx",' + 
-			'oauth_version="1.0"' ;
-
-	var options = {
-			hostname: 'api.twitter.com',
-			path: '/1.1/statuses/home_timeline.json',
-			method: 'GET',
-			
-			headers : {
-				'Authorization': auth
-			}
-	};
-	
-	var body = "";
-	var req = https.request(options, function(res) { // res is IncomingMessage help: http://nodejs.org/api/http.html#http_http_incomingmessage
-
-		console.log('HEADERS: ' + JSON.stringify(req.getHeader("Authorization")));
-		// res.statusCode
-		res.setEncoding("utf8");
-		res.on('data', function (chunk) {// this happens multiple times! So need to use 'body' to collect all data
-			body += chunk;
-//			console.log(res.headers);
-		});
-		
-		var data="";
-		res.on('end', function () { // when we have full 'body', convert to JSON and send back to client.
-			try {
-				data = JSON.parse(body);
-		    } catch (er) {
-		    	// something wrong with JSON
-		    	response.statusCode = 400;
-		    	return response.end('error: ' + er.message);
-		    }
-
-		    // redirect to app home	    
-		    response.send(data);
-		    response.end();
-		  });
-	});
-	req.end();
-	
-	
-//	oa.getOAuthRequestToken(function(error, oauth_token, oauth_token_secret, results){
-//		if (error) {
-//			console.log(error);
-//			res.send("yeah no. didn't work.")
-//		}
-//		else {
-////			req.session.oauth = {};
-////			req.session.oauth.token = oauth_token;
-//			console.log('oauth.token: ' + oauth_token);
-////			req.session.oauth.token_secret = oauth_token_secret;
-//			console.log('oauth.token_secret: ' + oauth_token_secret);
-//			res.redirect('https://twitter.com/oauth/authenticate?oauth_token='+oauth_token)
-//	}
-//	});
-	
-	
-});
 
 app.get('/fetch_tweets', function(request, response) {
 	oauth.get(
 		      'https://api.twitter.com/1.1/statuses/home_timeline.json',
-		      '81404737-dOUXh4oOjTnu3RJH1MeRSviEbuCCopNO53tfI0mTx', 
-		      //you can get it at dev.twitter.com for your own apps
-		      'zKUz6rwOqURPRckjvVkIWlYwlOUXsXshw9N4U9MXQsyaM', 
-		      //you can get it at dev.twitter.com for your own apps
+		      _TWITTER_ACCESS_TOKEN, 
+		      _TWITTER_ACCESS_TOKEN_SECRET, 
 		      function (e, data, res){
 		        if (e) console.error(e);        
-		        console.log(require('util').inspect(data));
+		       response.send(JSON.parse(data));
 	}); 
-	response.sendfile(__dirname+'/twitter_login.html');
 });
 
-
-
-
-
- 
-
-
-
-app.get('/send_tweet', function(request, response){
-
-	var auth = 'OAuth ' +
+app.get('/send_tweet', function(request, response) {
+	oauth.post(
+			  "https://api.twitter.com/1.1/statuses/update.json",
+		      _TWITTER_ACCESS_TOKEN, 
+		      _TWITTER_ACCESS_TOKEN_SECRET, 
+			  {"status":"Test tweets #OpenHack2015"},
+			  function(error, data) {
+			    if(error) console.log(require('sys').inspect(error))
+			    else console.log(data)
+			  }
+	);
 	
-		'oauth_consumer_key="2bjc6UMsRz85YC4JIzYZ984nr",' +
-		'oauth_nonce="6bab67d9624780d27ec912ecdb6b4d5c",' +
-		'oauth_signature="zF0QG3vFTKDkpmaF%2Fwtx8X6wjXw%3D",' +
-		'oauth_signature_method="HMAC-SHA1",' +
-		'oauth_timestamp="1422702829",' +
-		'oauth_token="81404737-dOUXh4oOjTnu3RJH1MeRSviEbuCCopNO53tfI0mTx",' + 
-		'oauth_version="1.0"' ;
-	
-	var options = {
-		hostname: 'api.twitter.com',
-		path: '/1.1/statuses/update.json',
-		method: 'POST',
-		
-		headers : {
-			'Authorization': auth
-		}
-	};
-	
-	var body = "";
-	var req = https.request(options, function(res) { // res is IncomingMessage help: http://nodejs.org/api/http.html#http_http_incomingmessage
-		res.setEncoding("utf8");
-		res.on('data', function (chunk) {// this happens multiple times! So need to use 'body' to collect all data
-//			body += chunk;
-			console.log(chunk);
-	});
-	req.write('status=%22Test+1+%23OpenHack2015%22');
-	
-	var data="";
-	res.on('end', function () { // when we have full 'body', convert to JSON and send back to client.
-		try {
-			data = JSON.parse(body);
-	    } catch (er) {
-	    	// something wrong with JSON
-	    	response.statusCode = 400;
-	    	return response.end('error: ' + er.message);
-	    }
-	
-	    // redirect to app home	    
-	    response.send(data);
-	    response.end();
-	  });
-	});
-	req.end();
-
-	response.send("twitter login callback here!");
 });
-
 
 
 var port = process.env.PORT || 5000;
