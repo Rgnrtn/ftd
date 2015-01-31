@@ -156,6 +156,7 @@
 		    function (response) {
 		      if (response && !response.error) {
 		        /* handle the result */
+		        getMsg();
 		        console.log(response);
 		      }
 		    }
@@ -178,7 +179,6 @@
 		        		j++;
 			        	if (j==1)
 			        	{
-
 			        		$('#facebook_content_1').text(response.data[i].message);
 			        		$('#facebook_time_1').text(response.data[i].created_time);
 			        		$('#facebook_name_1').text(response.data[i].from.name)
@@ -219,6 +219,52 @@
 		  xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 		  xmlhttp.send("access_token=" + access_token);
 	  }
+	  		choice1=0;choice2=0;choice3=0;
+	  			$('span#choice1').click(function()
+	  			{
+	  				if (choice1==0)
+	  				{
+	  					choice1=1;
+	  					$(this).css({"border":"1px solid green"});
+	  				}
+	  				else
+	  				{
+	  					choice1=0;
+	  					$(this).css({"border":"0px"});
+	  				}
+	  			});
+	  			$('span#choice2').click(function()
+	  			{
+	  				if (choice2==0)
+	  				{
+	  					choice2=1;
+	  					$(this).css({"border":"1px solid green"});
+	  				}
+	  				else
+	  				{
+	  					choice2=0;
+	  					$(this).css({"border":"0px"});
+	  				}
+	  			});
+
+	  			$('span#choice3').click(function()
+	  			{
+	  				if (choice3==0)
+	  				{
+	  					choice3=1;
+	  					$(this).css({"border":"1px solid green"});
+	  				}
+	  				else
+	  				{
+	  					choice3=0;
+	  					$(this).css({"border":"0px"});
+	  				}
+	  			});
+	  			$('div#post1').click(function()
+	  			{
+	  				postMsg($('#input1').val());
+	  				
+	  			});
 				$(".objectDrag").draggable({helper:'clone'});  
 				$(".objectDrop").droppable({
 					accept: ".objectDrag",
@@ -228,9 +274,9 @@
 							if ($(this).attr('id')=='facebook')
 							{
 								alert(1);
-								alert($(ui.draggable).last().first().next().text());
-								getMsg();
-							}
+
+								postMsg($(ui.draggable).children().first().next().next().text());
+								}
   					}
 				});
 				$.getJSON( "/weibo_home?access_token=2.00bFo2AGfagwYCc4a389cecf0YeBKE",function( data ) {
@@ -329,37 +375,35 @@
 				<section class="container">
 					<header>
 					<div class="conctinput"> 
-						<textarea class="concttarea" placeholder="What's new?"></textarea>
+						<textarea id='input1' class="concttarea" placeholder="What's new?"></textarea>
 					</div>
 					<div class="conctbom">
 						<div class="conctbleft">
 							<ul class="conctbul">
 								<li class="conctbli">
-									<a href="" class="conctblink">
-										<span class="conctbicobox">
-											<b class="conctbico conctbico1"></b>
-										</span>
-										<span class="conctbtxt icon icon fa-facebook"></span>
-									</a>
+									<span class="conctbicobox">
+										<b class="conctbico conctbico1"></b>
+									</span>
+									<span class="conctbtxt icon icon fa-facebook" id='choice1'></span>
 								</li>
 								<li class="conctbli">
 									<span class="conctbicobox">
 										<b class="conctbico conctbico2"></b>
 									</span>
-									<span class="conctbtxt icon icon fa-twitter"></span>
+									<span class="conctbtxt icon icon fa-twitter" id='choice2'></span>
 								</li>
 								<li class="conctbli">
 									<span class="conctbicobox">
 										<b class="conctbico conctbico3"></b>
 									</span>
-									<span class="conctbtxt icon icon fa-weibo"></span>
+									<span class="conctbtxt icon icon fa-weibo" id="choice3"></span>
 								</li>
 					
 							</ul>
 						</div>
 						<div class="conctbright">
 							
-							<div class="conctbrfb">
+							<div class="conctbrfb" style="margin-top:5px" id='post1'>
 								<span>Post</span>
 							</div>
 
