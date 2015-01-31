@@ -14,8 +14,8 @@ var _TWITTER_ACCESS_TOKEN = '81404737-dOUXh4oOjTnu3RJH1MeRSviEbuCCopNO53tfI0mTx'
 var _TWITTER_ACCESS_TOKEN_SECRET = 'zKUz6rwOqURPRckjvVkIWlYwlOUXsXshw9N4U9MXQsyaM';
 
 
-var _WEIBO_CODE ="c8cfe26cd92d2a40ab81214e389f2abd";
-var _WEIBO_ACCESS_TOKEN = "2.00Ut6lRBfagwYC071b2f7df209COpI";
+var _WEIBO_CODE ="dfa57b94d1f4e74f577137be5c827f3b";
+var _WEIBO_ACCESS_TOKEN = "2.00bFo2AGfagwYCc4a389cecf0YeBKE";
 
 
 var oauth = new OAuth.OAuth(
@@ -60,9 +60,11 @@ app.get('/weibo_update', function(request, response) {
 	var token = JSON.parse(json_test)['access_token'];
 
 	var text = '';
+
 	text += request.param('text');
 	console.log(text);
 	console.log(token);
+
 	var querystring = require('querystring');
 	var post_data = querystring.stringify({
       'status' : text
@@ -108,8 +110,8 @@ app.get('/weibo_update', function(request, response) {
 });
 
 app.get('/weibo_callback', function(request, response) {
-	var code = request.param('code');
-	//var code = _WEIBO_CODE;
+	//var code = request.param('code');
+	var code = _WEIBO_CODE;
 	
 	var options = {
 			hostname: 'api.weibo.com',
@@ -140,6 +142,7 @@ app.get('/weibo_callback', function(request, response) {
 		    // redirect to app home	   
 		    response.redirect('/weibo_home?access_token=' + data['access_token'] + "&code=" + code);
 //		    var access_token = "2.00Ut6lRBfagwYC071b2f7df209COpI";
+		    //response.send(data);
 		    response.end();
 		  });
 	});

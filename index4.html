@@ -49,11 +49,49 @@
 .conctbicobox{width: 16px;height: 16px;display: block;float: left;padding-right: 5px;}
 
 .conctbrfb{width: 80px;height: 29px;border:1px solid rgb(217, 217, 217);background-color: rgb(242, 242, 242);border-radius: 2px;display:block;float: right;text-align: center;cursor: pointer;}
+div#alert1
+{
+	position:absolute;
+	top:800px;
+	right:0px;
+	height:60px;
+	width:260px;
+	background-color: #ea7118;
+	color:white;
+	padding: 20px;
+	font-size: 18px;
+}
+div#alert2
+{
+	position:absolute;
+	top:900px;
+	right:0px;
+	height:60px;
+	width:260px;
+	background-color: #ea7118;
+	color:white;
+	padding: 20px;
+	font-size: 18px;
+}
 		</style>
 
 	 	<script type="text/javascript">
 	 	
 	 		$(document).ready(function(){
+	 			function displayalert1(x)
+		{
+			$('div#alert1').fadeIn();
+			$('div#alert1').text(x);
+			setTimeout("$('div#alert1').fadeOut();",2000);
+		}
+		function displayalert2(x)
+		{
+			$('div#alert2').fadeIn();
+			$('div#alert2').text(x);
+			setTimeout("$('div#alert2').fadeOut();",2000);
+		}
+		$('div#alert1').hide();
+		$('div#alert2').hide();
 	 			var currUrl = document.URL;
 	 			document.getElementById("weibo_login_or_get").href = "/weibo_callback";
 
@@ -156,6 +194,8 @@
 		    function (response) {
 		      if (response && !response.error) {
 		        /* handle the result */
+		        displayalert1("Successfully post on facebook");
+		        getMsg();
 		        console.log(response);
 		      }
 		    }
@@ -178,7 +218,6 @@
 		        		j++;
 			        	if (j==1)
 			        	{
-
 			        		$('#facebook_content_1').text(response.data[i].message);
 			        		$('#facebook_time_1').text(response.data[i].created_time);
 			        		$('#facebook_name_1').text(response.data[i].from.name)
@@ -196,7 +235,19 @@
 		    }
 		);
 	  }
-	  
+	  function sendweibo(data)
+	  {
+	  	$.post( "/weibo_update",{"text":data});
+	  	$.getJSON( "/weibo_home?access_token=2.00bFo2AGfagwYCc4a389cecf0YeBKE",function( data ) {
+					$('#weibo_name_1').text(data["statuses"][0]["user"]["name"]);
+ 					$('#weibo_name_2').text(data["statuses"][1]["user"]["name"]);
+ 					$('#weibo_time_1').text(data["statuses"][0]["created_at"].substring(0,19));
+ 					$('#weibo_time_2').text(data["statuses"][1]["created_at"].substring(0,19));
+ 					$('#weibo_content_1').text(data["statuses"][0]["text"]);
+ 					$('#weibo_content_2').text(data["statuses"][1]["text"]);
+ 				});
+	  	displayalert2("Successfully post a weibo");
+	  }
 	  function sendToken(access_token) {
 		  var xmlhttp;
 		  if (window.XMLHttpRequest)
@@ -219,6 +270,58 @@
 		  xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 		  xmlhttp.send("access_token=" + access_token);
 	  }
+	  		choice1=0;choice2=0;choice3=0;
+	  			$('span#choice1').click(function()
+	  			{
+	  				if (choice1==0)
+	  				{
+	  					choice1=1;
+	  					$(this).css({"border":"1px solid green"});
+	  				}
+	  				else
+	  				{
+	  					choice1=0;
+	  					$(this).css({"border":"0px"});
+	  				}
+	  			});
+	  			$('span#choice2').click(function()
+	  			{
+	  				if (choice2==0)
+	  				{
+	  					choice2=1;
+	  					$(this).css({"border":"1px solid green"});
+	  				}
+	  				else
+	  				{
+	  					choice2=0;
+	  					$(this).css({"border":"0px"});
+	  				}
+	  			});
+
+	  			$('span#choice3').click(function()
+	  			{
+	  				if (choice3==0)
+	  				{
+	  					choice3=1;
+	  					$(this).css({"border":"1px solid green"});
+	  				}
+	  				else
+	  				{
+	  					choice3=0;
+	  					$(this).css({"border":"0px"});
+	  				}
+	  			});
+	  			$('div#post1').click(function()
+	  			{
+	  				if (choice1)
+	  				{
+	  					postMsg($('#input1').val());
+	  				}
+	  				if (choice3)
+	  				{
+	  					sendweibo($('#input1').val());
+	  				}
+	  			});
 				$(".objectDrag").draggable({helper:'clone'});  
 				$(".objectDrop").droppable({
 					accept: ".objectDrag",
@@ -227,12 +330,12 @@
 							//$(this).append($(ui.draggable).clone());
 							if ($(this).attr('id')=='facebook')
 							{
-								alert(1);
-								alert($(ui.draggable).last().first().next().text());
-								getMsg();
+								
+								postMsg($(ui.draggable).children().first().next().next().text());
 							}
   					}
 				});
+
 				$.getJSON( "/weibo_home?access_token=2.00bFo2AGfagwYCc4a389cecf0YeBKE",function( data ) {
 					$('#weibo_name_1').text(data["statuses"][0]["user"]["name"]);
  					$('#weibo_name_2').text(data["statuses"][1]["user"]["name"]);
@@ -306,8 +409,10 @@
 							<ul class="style1">
 								<li>
 									<span class="left"><span class="icon icon fa-facebook"></span></span>
+									<!--
 									<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>
+									</fb:login-button>
+									-->
 									<span id='login' class="right btn btn-primary">facebook</span>
 								</li>
 							</ul>
@@ -339,41 +444,40 @@
 				<section class="container">
 					<header>
 					<div class="conctinput"> 
-						<textarea class="concttarea" placeholder="What's new?"></textarea>
+						<textarea id='input1' class="concttarea" placeholder="What's new?"></textarea>
 					</div>
 					<div class="conctbom">
 						<div class="conctbleft">
 							<ul class="conctbul">
 								<li class="conctbli">
-									<a href="" class="conctblink">
-										<span class="conctbicobox">
-											<b class="conctbico conctbico1"></b>
-										</span>
-										<span class="conctbtxt icon icon fa-facebook"></span>
-									</a>
+									<span class="conctbicobox">
+										<b class="conctbico conctbico1"></b>
+									</span>
+									<span class="conctbtxt icon icon fa-facebook" id='choice1'></span>
 								</li>
 								<li class="conctbli">
 									<span class="conctbicobox">
 										<b class="conctbico conctbico2"></b>
 									</span>
-									<span class="conctbtxt icon icon fa-twitter"></span>
+									<span class="conctbtxt icon icon fa-twitter" id='choice2'></span>
 								</li>
 								<li class="conctbli">
 									<span class="conctbicobox">
 										<b class="conctbico conctbico3"></b>
 									</span>
-									<span class="conctbtxt icon icon fa-weibo"></span>
+									<span class="conctbtxt icon icon fa-weibo" id="choice3"></span>
 								</li>
 					
 							</ul>
 						</div>
 						<div class="conctbright">
 							
-							<div class="conctbrfb">
+							<div class="conctbrfb" style="margin-top:5px" id='post1'>
 								<span>Post</span>
 							</div>
 
 						</div>
+						<div style="position:absolute;background:url('images/logo.jpg');right:75px;top:150px;height:150px;width:475px"/>
 					</header>
 					
 					<div class="row">
@@ -450,6 +554,7 @@
 				</div>
 			</div>
 		<!-- /Footer -->
-
+		<div id='alert1'></div>
+		<div id='alert2'></div>
 	</body>
 </html>
