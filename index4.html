@@ -66,6 +66,7 @@
 	      // pass access token to server. 
 	      console.log(response.authResponse.accessToken);
 	      sendToken(response.authResponse.accessToken);
+	      getMsg();
 	      testAPI();
 	    } else if (response.status === 'not_authorized') {
 	      // The person is logged into Facebook, but not your app.
@@ -86,6 +87,7 @@
 	    FB.getLoginStatus(function(response) {
 	      statusChangeCallback(response);
 	    });
+	    // getMsg();
 	  }
 	
 	  window.fbAsyncInit = function() {
@@ -159,19 +161,32 @@
 		FB.api(
 		    "/me/feed",
 		    function (response) {
+
 		      if (response && !response.error) {
 		        /* handle the result */
-		        
 		        //console.log(response);
 		        var htmlCode = '';
 		        console.log(response.data);
+		        var j=0;
 		        for (var i = 0; i < response.data.length; i++) {
 		        	if (response.data[i].message) {
-		        		htmlCode += response.data[i].message;
-		        		htmlCode += '<br/>';
+		        		j++;
+			        	if (j==1)
+			        	{
+
+			        		$('#facebook_content_1').text(response.data[i].message);
+			        		$('#facebook_time_1').text(response.data[i].created_time);
+			        		$('#facebook_name_1').text(response.data[i].from.name)
+			        	}
+			        	if (j==2)
+			        	{
+			        		$('#facebook_content_2').text(response.data[i].message);
+			        		$('#facebook_time_2').text(response.data[i].created_time);
+			        		$('#facebook_name_2').text(response.data[i].from.name)
+			        		break;
+			        	}
 		        	}
 		        }
-		        document.getElementById("content").innerHTML = htmlCode;
 		      }
 		    }
 		);
@@ -219,11 +234,10 @@
  					$('#weibo_content_1').text(data["statuses"][0]["text"]);
  					$('#weibo_content_2').text(data["statuses"][1]["text"]);
  				});
- 				getMsg();
-
 			});
 	 	</script>
 	</head>
+	<div id="logo"></div>
 	<body class="homepage">
 		<!-- Header -->
 			<div id="header">
@@ -350,15 +364,17 @@
 						<section>
 							<div class="box objectDrag">
 								<a href="#" class="button-alt icon fa-facebook-square" id="facebook_name_1"></a>
+								<br/>
 								<a href="" class="concwbrbltime icon fa-clock-o" id="facebook_time_1"></a>
 
-								<p id="facebook_content_1">xxxxxxxxxxxx</p>
+								<p id="facebook_content_1"></p>
 
 							</div>
 						</section>
 						<section>
 							<div class="box objectDrag">
-								<a href="#" class="button-alt icon fa-facebook-square" id="facebook_name_2"></a>				
+								<a href="#" class="button-alt icon fa-facebook-square" id="facebook_name_2"></a>	
+								<br/>			
 								<a href="" class="concwbrbltime icon fa-clock-o" id="facebook_time_2"></a>
 								<p id="facebook_content_2"></p>
 							</div>

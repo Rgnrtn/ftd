@@ -165,23 +165,11 @@
 		        //console.log(response);
 		        var htmlCode = '';
 		        console.log(response.data);
-		        var j=0;
 		        for (var i = 0; i < response.data.length; i++) {
 		        	if (response.data[i].message) {
-		        		j++;
-			        	if (j==1)
-			        	{
-			        		$('#facebook_content_1').text(response.data[i].message);
-			        	}
-			        	if (j==2)
-			        	{
-			        		$('#facebook_content_2').text(response.data[i].message);
-			        		break;
-			        	}
+		        		htmlCode += response.data[i].message;
+		        		htmlCode += '<br/>';
 		        	}
-		        	
-
-		        	
 		        }
 		        document.getElementById("content").innerHTML = htmlCode;
 		      }
