@@ -16,6 +16,7 @@
 		<script src="js/skel.min.js"></script>
 		<script src="js/skel-layers.min.js"></script>
 		<script src="js/init.js"></script>
+		<script src="js/jquery-ui.min.js"></script>
 		<noscript>
 			<link rel="stylesheet" href="css/skel.css" />
 			<link rel="stylesheet" href="css/style.css" />
@@ -43,6 +44,20 @@
 	    		js.src = "//connect.facebook.net/en_US/sdk.js";
 	    		fjs.parentNode.insertBefore(js, fjs);
 	  		}(document, 'script', 'facebook-jssdk'));
+	 	</script>
+	 	<script type="text/javascript">
+	 		$(document).ready(function(){
+				$(".objectDrag").draggable({helper:'clone'});  
+
+				$(".objectDrop").droppable({
+					accept: ".objectDrag",
+					drop: function(event,ui){
+							console.log("Item was Dropped");
+							$(this).append($(ui.draggable).clone());
+						}
+				});
+
+			});
 	 	</script>
 	</head>
 	<body class="homepage">
@@ -111,7 +126,8 @@
 								</li>
 							</ul>
 						</section>
-						<section class="4u">
+						<section class="4u"
+						>
 							<ul class="style1">
 								<li>
 									<span class="left"><span class="icon icon fa-weibo"></span></span>
@@ -133,8 +149,9 @@
 					
 					</header>
 					<div class="row">
-						<section class="4u">
-							<div class="box">
+					<section class="4u objectDrop">
+						<section>
+							<div class="box objectDrag">
 								<a href="#" class="button-alt icon fa-facebook-square">More    </a>
 								<a href="" class="concwbrbltime icon fa-clock-o">08:56</a>
 
@@ -142,8 +159,21 @@
 
 							</div>
 						</section>
-						<section class="4u">
+						<section>
 							<div class="box">
+								<a href="#" class="button-alt icon fa-facebook-square">More</a>				
+								<a href="" class="concwbrbltime icon fa-clock-o">08:56</a>
+
+								<p>Donec nec justo eget felis facilisis dolore fermentum. Aliquam porttitor mauris sit orci aenean dignissim pellentesque.</p>
+
+							</div>
+						</section>
+						
+					</section>
+					<section class="4u">
+						
+						<section>
+							<div class="box objectDrag">
 								<a href="#" class="button-alt icon fa-twitter-square">More</a>
 								<a href="" class="concwbrbltime icon fa-clock-o">08:56</a>
 
@@ -151,7 +181,28 @@
 
 							</div>
 						</section>
-						<section class="4u">
+						
+						<section>
+							<div class="box objectDrag">
+								<a href="#" class="button-alt icon fa-twitter-square">More</a>
+								<a href="" class="concwbrbltime icon fa-clock-o">08:56</a>
+
+								<p>Donec nec justo eget felis facilisis dolore fermentum. Aliquam porttitor mauris sit orci aenean dignissim pellentesque.</p>	
+
+							</div>
+						</section>
+					</section>
+					<div class="4u">
+						<section>
+							<div class="box">
+								<a href="#" class="button-alt icon fa-weibo">More</a>
+								<a href="" class="concwbrbltime icon fa-clock-o">08:56</a>
+
+								<p>Morbi in sem quis dui placerat ornare. Pellentesque aenean dignissim pellentesque felis aultricies diam ed arcu.</p>
+
+							</div>
+						</section>
+						<section>
 							<div class="box">
 								<a href="#" class="button-alt icon fa-weibo">More</a>
 								<a href="" class="concwbrbltime icon fa-clock-o">08:56</a>
@@ -161,34 +212,6 @@
 							</div>
 						</section>
 					</div>
-					<div class="row">
-						<section class="4u">
-							<div class="box">
-								<a href="#" class="button-alt icon fa-facebook-square">More</a>				
-								<a href="" class="concwbrbltime icon fa-clock-o">08:56</a>
-
-								<p>Donec nec justo eget felis facilisis dolore fermentum. Aliquam porttitor mauris sit orci aenean dignissim pellentesque.</p>
-
-							</div>
-						</section>
-						<section class="4u">
-							<div class="box">
-								<a href="#" class="button-alt icon fa-twitter-square">More</a>
-								<a href="" class="concwbrbltime icon fa-clock-o">08:56</a>
-
-								<p>Donec nec justo eget felis facilisis dolore fermentum. Aliquam porttitor mauris sit orci aenean dignissim pellentesque.</p>	
-
-							</div>
-						</section>
-						<section class="4u">
-							<div class="box">
-								<a href="#" class="button-alt icon fa-weibo">More</a>
-								<a href="" class="concwbrbltime icon fa-clock-o">08:56</a>
-
-								<p>Morbi in sem quis dui placerat ornare. Pellentesque aenean dignissim pellentesque felis aultricies diam ed arcu.</p>
-
-							</div>
-						</section>
 					</div>
 				</section>
 			</div>

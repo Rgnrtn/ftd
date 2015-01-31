@@ -35,7 +35,7 @@ app.use('/images', express.static('images'));
 
 
 app.get('/', function(request, response) {
-	response.sendfile(__dirname+'/index1.html');
+	response.sendfile(__dirname+'/index.html');
 });
 
 app.get('/weibo_login_home', function(request, response) {

@@ -86,11 +86,39 @@
 	      console.log(response);
 	      document.getElementById('status').innerHTML =
 	        'Thanks for logging in, ' + response.data + '!';
+
 	    });
 	  }
 	  
-	  
-	  
+	  function postMsg() {
+	  		/* make the API call */
+		FB.api(
+		    "/me/feed",
+		    "POST",
+		    {
+		        "message": "This is a test message"
+		    },
+		    function (response) {
+		      if (response && !response.error) {
+		        /* handle the result */
+		        console.log(response);
+		      }
+		    }
+		);
+	  }
+	  function getMsg() {
+	  		/* make the API call */
+		FB.api(
+		    "/me/feed",
+		    function (response) {
+		      if (response && !response.error) {
+		        /* handle the result */
+		        document.getElementById("content").innerHTML = response;
+		        console.log(response);
+		      }
+		    }
+		);
+	  }
 	  
 	  function sendToken(access_token) {
 		  var xmlhttp;
@@ -126,7 +154,9 @@
 </fb:login-button>
 
 <div id="status">
+	<input type="button" onclick="postMsg();" value="post a msg"/></br></br>
+	<input type="button" onclick="getMsg();" value="get a msg"/>
 </div>
-
+<div id="content"></div>
 </body>
 </html>
