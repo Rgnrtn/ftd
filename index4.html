@@ -238,15 +238,17 @@ div#alert2
 	  function sendweibo(text)
 	  {
 	  	console.log(text);
-	  	$.getJSON( "/weibo_update?text=" + text);
-	  	$.getJSON( "/weibo_home?access_token=2.00bFo2AGfagwYCc4a389cecf0YeBKE",function( data ) {
-					$('#weibo_name_1').text(data["statuses"][0]["user"]["name"]);
- 					$('#weibo_name_2').text(data["statuses"][1]["user"]["name"]);
- 					$('#weibo_time_1').text(data["statuses"][0]["created_at"].substring(0,19));
- 					$('#weibo_time_2').text(data["statuses"][1]["created_at"].substring(0,19));
- 					$('#weibo_content_1').text(data["statuses"][0]["text"]);
- 					$('#weibo_content_2').text(data["statuses"][1]["text"]);
- 				});
+	  	$.getJSON( "/weibo_update?text=" + text, function(data){
+	  		$.getJSON( "/weibo_home?access_token=2.00bFo2AGfagwYCc4a389cecf0YeBKE",function( data ) {
+				$('#weibo_name_1').text(data["statuses"][0]["user"]["name"]);
+					$('#weibo_name_2').text(data["statuses"][1]["user"]["name"]);
+					$('#weibo_time_1').text(data["statuses"][0]["created_at"].substring(0,19));
+					$('#weibo_time_2').text(data["statuses"][1]["created_at"].substring(0,19));
+					$('#weibo_content_1').text(data["statuses"][0]["text"]);
+					$('#weibo_content_2').text(data["statuses"][1]["text"]);
+				});
+	  	});
+	  	
 	  	displayalert2("Successfully post a weibo");
 	  }
 	  function sendToken(access_token) {
