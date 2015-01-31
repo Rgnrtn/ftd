@@ -61,7 +61,7 @@ app.get('/weibo_update', function(request, response) {
 
 	var text = '';
 	text += request.param['text'];
-
+	console.log(text);
 	var querystring = require('querystring');
 	var post_data = querystring.stringify({
       'status' : text
