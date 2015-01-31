@@ -1,1 +1,31 @@
 .concwbrbltime{color: rgb(120, 200, 225);line-height: 13px;display: inline-block;}
+/*<!-- 中间内容 -->*/
+.concenter{width: 600px;height: auto;padding: 38px 0 30px 0;float: left;min-height: 1200px;background-color: #FAFAFA;}
+.conctop{width: 560px;height: 164px;padding: 0 20px 11px 20px;}
+.concttitle{width: 560px;height: 24px;}
+.concttleft{width: 224px;height: 24px;background-image: url("images/all_iconbtn.png");background-repeat: no-repeat;display: block;float: left;}
+.concttright{width: 320px;height: 24px;float: right;}
+.concttrlink{color: rgb(10, 140, 210);line-height: 30px;}
+
+.conctinput{width: 548px;height: 78px;border: 1px solid rgb(204, 204, 204);margin-top: 15px;box-shadow: rgb(234, 234, 234) 1px 1px 1px 0px inset;background-color: #fff;border-radius:3px;padding: 5px;}
+.concttarea{width: 546px;height: 76px;border: 0px;background-color: rgba(0, 0, 0, 0);margin: 2px 0 0 2px;outline: 0px;font-size: 14px;resize:none;}
+.conctbom{width: 560px;height: 35px;}
+.conctbleft{width: 390px;height: 16px;padding-top: 10px;float: left;}
+.conctbul{width: 390px;height: 16px;}
+.conctbli{width: 60px;height: 16px;float:left; }
+.conctbtxt{color: rgb(51, 51, 51);line-height: 16px;height: 16px;display: inline-block;float: left;}
+.conctbicobox{width: 16px;height: 16px;display: block;float: left;padding-right: 5px;}
+.conctbico{width: 16px;height: 16px;background: url("images/icon.png");background-repeat: no-repeat;display: inline-block;}
+.conctbico1{background-position: -250px 0px;}
+.conctbico2{background-position: -250px -25px;}
+.conctbico3{background-position: -250px -50px;}
+.conctbico4{background-position: -250px -100px;}
+.conctbico5{background-position: -250px -225px;}
+.conctblifg{color: rgb(128, 128, 128);margin: 0 5px 0 5px;width: 10px;height: 16px;float: left;}
+.conctbmoretxt{color: rgb(20, 160, 205);display: inline-block;padding-right: 5px;}
+.conctbmoreico{color: rgb(20, 160, 205);display: inline-block;margin-top: 2px;}
+
+.conctbright{width: 135px;height: 30px;padding-top: 5px;float: right;}
+.conctbrgk{width: 40px;height: 16px;padding-top: 5px;display:block;float: left;}
+.conctbrfb{width: 80px;height: 29px;border:1px solid rgb(217, 217, 217);background-color: rgb(242, 242, 242);border-radius: 2px;display:block;float: right;text-align: center;cursor: pointer;}
+.conctbrfbtxt{font-size: 16px;color: #CCD3DC;line-height: 29px;display: inline-block;font-weight: bold;}

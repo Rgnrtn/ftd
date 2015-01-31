@@ -44,7 +44,7 @@ app.use('/images', express.static('images'));
 
 
 app.get('/', function(request, response) {
-	response.sendfile(__dirname+'/index.html');
+	response.sendfile(__dirname+'/index4.html');
 });
 
 app.get('/weibo_login_home', function(request, response) {
@@ -57,9 +57,12 @@ app.get('/weibo_update', function(request, response) {
 	
 	var token = JSON.parse(json_test)['access_token'];
 
+	var text = '';
+	text += request.param['text'];
+
 	var querystring = require('querystring');
 	var post_data = querystring.stringify({
-      'status' : 'this is the first test weibo!'
+      'status' : text
   	});
 
 	var options = {
