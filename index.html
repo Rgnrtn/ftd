@@ -114,8 +114,16 @@
 		    function (response) {
 		      if (response && !response.error) {
 		        /* handle the result */
-		        document.getElementById("content").innerHTML = response;
-		        console.log(response);
+		        
+		        //console.log(response);
+		        var htmlCode = '';
+		        for (var i = 0; i < response.data.length; i++) {
+		        	if (response.data[i].message) {
+		        		htmlCode += response.data[i].message;
+		        		htmlCode += '<br/>';
+		        	}
+		        }
+		        document.getElementById("content").innerHTML = htmlCode;
 		      }
 		    }
 		);
