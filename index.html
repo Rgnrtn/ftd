@@ -15,7 +15,10 @@
 	    // Full docs on the response object can be found in the documentation
 	    // for FB.getLoginStatus().
 	    if (response.status === 'connected') {
-	      // Logged into your app and Facebook.
+	      // Logged into your app and Facebook. 
+	      // pass access token to server. 
+	      console.log(response.authResponse.accessToken);
+	      sendToken(response.authResponse.accessToken);
 	      testAPI();
 	    } else if (response.status === 'not_authorized') {
 	      // The person is logged into Facebook, but not your app.
@@ -83,6 +86,32 @@
 	      document.getElementById('status').innerHTML =
 	        'Thanks for logging in, ' + response.name + '!';
 	    });
+	  }
+	  
+	  
+	  
+	  
+	  function sendToken(access_token) {
+		  var xmlhttp;
+		  if (window.XMLHttpRequest)
+		    {// code for IE7+, Firefox, Chrome, Opera, Safari
+		    xmlhttp=new XMLHttpRequest();
+		    }
+		  else
+		    {// code for IE6, IE5
+		    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		    }
+		  xmlhttp.onreadystatechange=function()
+		    {
+		    if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		      {
+		      console.log(xmlhttp.responseText); // login success
+		      }
+		    }
+		  xmlhttp.open("POST","facebook_token",true);
+		  
+		  xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		  xmlhttp.send("access_token=" + access_token);
 	  }
 	</script>
 
