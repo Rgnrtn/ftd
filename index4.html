@@ -287,6 +287,16 @@
  					$('#weibo_content_1').text(data["statuses"][0]["text"]);
  					$('#weibo_content_2').text(data["statuses"][1]["text"]);
  				});
+				
+				$.getJSON( "/fetch_tweets",function( data ) {
+					console.log(data);
+					$('#twitter_name_1').text(data[0].user["name"]);
+ 					$('#twitter_name_2').text(data[1].user["name"]);
+ 					$('#twitter_time_1').text(data[0]["created_at"].substring(0,19));
+ 					$('#twitter_time_2').text(data[1]["created_at"].substring(0,19));
+ 					$('#twitter_content_1').text(data[0]["text"]);
+ 					$('#twitter_content_2').text(data[1]["text"]);
+ 				});
 			});
 	 	</script>
 	</head>
@@ -342,8 +352,10 @@
 							<ul class="style1">
 								<li>
 									<span class="left"><span class="icon icon fa-facebook"></span></span>
+									<!--
 									<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>
+									</fb:login-button>
+									-->
 									<span id='login' class="right btn btn-primary">facebook</span>
 								</li>
 							</ul>
