@@ -81,15 +81,45 @@
 	  // successful.  See statusChangeCallback() for when this call is made.
 	  function testAPI() {
 	    console.log('Welcome!  Fetching your information.... ');
-	    FB.api('/me', function(response) {
-	      console.log('Successful login for: ' + response.name);
+	    FB.api('/me/permissions', function(response) {
+	      //console.log('Successful login for: ' + response.name);
+	      console.log(response);
+	      /*
 	      document.getElementById('status').innerHTML =
 	        'Thanks for logging in, ' + response.name + '!';
+	    	*/
 	    });
 	  }
 	  
-	  
-	  
+	  function postMsg() {
+	  		/* make the API call */
+		FB.api(
+		    "/me/feed",
+		    "POST",
+		    {
+		        "message": "This is a test message"
+		    },
+		    function (response) {
+		      if (response && !response.error) {
+		        /* handle the result */
+		        console.log(response);
+		      }
+		    }
+		);
+	  }
+	  function getMsg() {
+	  		/* make the API call */
+		FB.api(
+		    "/me/feed",
+		    function (response) {
+		      if (response && !response.error) {
+		        /* handle the result */
+		        document.getElementById("content").innerHTML = response;
+		        console.log(response);
+		      }
+		    }
+		);
+	  }
 	  
 	  function sendToken(access_token) {
 		  var xmlhttp;
@@ -121,11 +151,13 @@
   the FB.login() function when clicked.
 -->
 
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+<fb:login-button scope="public_profile,email,publish_actions,read_stream" onlogin="checkLoginState();">
 </fb:login-button>
 
 <div id="status">
+	<input type="button" onclick="postMsg();" value="post a msg"/></br></br>
+	<input type="button" onclick="getMsg();" value="get a msg"/>
 </div>
-
+<div id="content"></div>
 </body>
 </html>
