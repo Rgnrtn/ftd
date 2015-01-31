@@ -30,7 +30,7 @@ app.get('/weibo_callback', function(request, response) {
 	
 	var options = {
 			hostname: 'api.weibo.com',
-			path: '/oauth2/access_token?client_id=2348647833&client_secret=fa360248bc7c33b45929826eb3f8510e&grant_type=authorization_code&redirect_uri=http://ftd.herokuapp.com/&code=' + code, // query_string already has "?q="
+			path: '/oauth2/access_token?client_id=2348647833&client_secret=fa360248bc7c33b45929826eb3f8510e&grant_type=authorization_code&redirect_uri=http://ftd.herokuapp.com/weibo_callback&code=' + code, // query_string already has "?q="
 			method: 'POST'
 	};
 	
