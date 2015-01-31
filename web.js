@@ -7,7 +7,6 @@ var https = require('https');
 var server = http.createServer(app);
 
 
-app.use(express.bodyParser());
 
 app.get('/', function(request, response) {
 	response.sendfile(__dirname+'/index.html');
