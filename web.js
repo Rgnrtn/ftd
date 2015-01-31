@@ -8,11 +8,20 @@ app.get('/', function(request, response) {
 });
 
 
+app.get('/weibo_login_home', function(request, response) {
+	response.sendfile(__dirname+'/weibotest.html');
+});
+
 app.get('/weibo_login', function(request, response) {
 	
 	
+	response.send("yes got it!");
+});
+
+app.get('/weibo_callback', function(request, response) {
 	
-	response.send("weibo login");
+	var code = request.param('code');
+	response.send("user code is " + code);
 });
 
 
