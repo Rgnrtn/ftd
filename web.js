@@ -7,6 +7,8 @@ var https = require('https');
 var server = http.createServer(app);
 
 
+app.use(express.bodyParser());
+
 app.get('/', function(request, response) {
 	response.sendfile(__dirname+'/index.html');
 });
@@ -75,7 +77,9 @@ app.get('/facebook_login', function(request, response) {
 });
 
 
+
+
 var port = process.env.PORT || 5000;
 server.listen(port, function() {
-  console.log("Node app is running at localhost:" + app.get('port'))
-})
+  console.log("Listening on " + port);
+});
