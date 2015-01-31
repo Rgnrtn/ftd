@@ -146,6 +146,12 @@ app.get('/facebook_login', function(request, response) {
 	response.send("facebook login");
 });
 
+app.get('/facebook_login1', function(request, response) {
+	
+	
+	response.send("facebook login1");
+});
+
 var port = process.env.PORT || 5000;
 server.listen(port, function() {
   console.log("Listening on " + port);
