@@ -60,8 +60,9 @@ app.get('/weibo_update', function(request, response) {
 	var token = JSON.parse(json_test)['access_token'];
 
 	var text = '';
-	text += request.param['text'];
-
+	text += request.param('text');
+	console.log(text);
+	console.log(token);
 	var querystring = require('querystring');
 	var post_data = querystring.stringify({
       'status' : text
@@ -107,8 +108,8 @@ app.get('/weibo_update', function(request, response) {
 });
 
 app.get('/weibo_callback', function(request, response) {
-//	var code = request.param('code');
-	var code = _WEIBO_CODE;
+	var code = request.param('code');
+	//var code = _WEIBO_CODE;
 	
 	var options = {
 			hostname: 'api.weibo.com',
@@ -236,6 +237,61 @@ app.get('/send_tweet', function(request, response) {
 	
 });
 
+app.get('/bing', function(request, response) {
+	var text = '';
+	text += request.param('text');
+	var qdata = 'translate ' + text + ' from english to chinese';
+	//var querystring = require('querystring');
+	var qstr ='';
+	//qstr += encodeURIComponent(qdata);
+	qstr += encodeURIComponent(qdata);
+	console.log("qstr: " + qstr);
+	/*
+	var options = {
+			hostname: 'api.justext.me',
+			path: qstr, // query_string already has "?q="
+			method: 'GET'
+	};
+	*/
+	var options = {
+			hostname: 'api.justext.me',
+			//path: qstr, // query_string already has "?q="
+			path : '/?Body=' + qstr,
+			method: 'GET'
+	};
+	var body = "";
+	
+	var http = require('http');
+	var req = http.request(options, function(res) { // res is IncomingMessage help: http://nodejs.org/api/http.html#http_http_incomingmessage
+		// res.statusCode
+		res.setEncoding("utf8");
+		res.on('data', function (chunk) {// this happens multiple times! So need to use 'body' to collect all data
+			body += chunk;
+		});
+		
+		var data="";
+		res.on('end', function () { // when we have full 'body', convert to JSON and send back to client.
+			try {
+				//data = body.substring(21, body.length-2);
+				data += body.substring(39, body.length - 23);
+		    } catch (er) {
+		    	// something wrong with JSON
+
+		    	response.statusCode = 400;
+		    	return response.end('error: ' + er.message);
+		    }
+
+		    // redirect to app home	   
+		    //response.redirect('/weibo_home?access_token=' + data['access_token'] + "&code=" + code);
+//		    var access_token = "2.00Ut6lRBfagwYC071b2f7df209COpI";
+		    response.send(data);
+		    response.end();
+		  });
+	});
+	console.log("22222");
+	req.end();
+
+});
 
 var port = process.env.PORT || 5000;
 server.listen(port, function() {
