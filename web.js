@@ -18,6 +18,7 @@ app.get('/weibo_login_home', function(request, response) {
 });
 
 app.get('/weibo_login', function(request, response) {
+	var json_test = '{"access_token":"2.00bFo2AGfagwYCc4a389cecf0YeBKE","remind_in":"157679999","expires_in":157679999,"uid":"5501994427"}';
 	
 	
 	response.send("yes got it!");
@@ -54,6 +55,11 @@ app.get('/weibo_callback', function(request, response) {
 
 		    // write back response json
 		    response.send(data);
+		    
+		    var access_token = "2.00bFo2AGfagwYCc4a389cecf0YeBKE";
+		    
+		    
+		    
 		    response.end();
 		  });
 	});
