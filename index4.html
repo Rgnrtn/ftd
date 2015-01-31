@@ -55,16 +55,8 @@
 	 	
 	 		$(document).ready(function(){
 	 			var currUrl = document.URL;
-	 			if (currUrl.indexOf("weibo") > -1) {
-	 				// found weibo in url
-	 				// set find weibo posts button
-	 				document.getElementById("weibo_login_or_get").href = "get/";
+	 			document.getElementById("weibo_login_or_get").href = "/weibo_callback";
 
-	 			} else {
-	 				// do nothing
-	 				// set login url
-	 				document.getElementById("weibo_login_or_get").href = "https://api.weibo.com/oauth2/authorize?client_id=2348647833&response_type=code&redirect_uri=http://ftd.herokuapp.com/weibo_callback";
-	 			}
 
 	 			  // This is called with the results from from FB.getLoginStatus().
 	  function statusChangeCallback(response) {
@@ -224,7 +216,7 @@
 							}
   					}
 				});
-				$.getJSON( "https://ftd.herokuapp.com/weibo_home?access_token=2.00bFo2AGfagwYCc4a389cecf0YeBKE",function( data ) {
+				$.getJSON( "/weibo_home?access_token=2.00bFo2AGfagwYCc4a389cecf0YeBKE",function( data ) {
 					$('#weibo_name_1').text(data["statuses"][0]["user"]["name"]);
  					$('#weibo_name_2').text(data["statuses"][1]["user"]["name"]);
  					$('#weibo_time_1').text(data["statuses"][0]["created_at"].substring(0,19));
