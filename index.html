@@ -117,6 +117,7 @@
 		        
 		        //console.log(response);
 		        var htmlCode = '';
+		        console.log(response.data);
 		        for (var i = 0; i < response.data.length; i++) {
 		        	if (response.data[i].message) {
 		        		htmlCode += response.data[i].message;
