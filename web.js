@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 
 
 app.get('/', function(request, response) {
-	response.sendfile(__dirname+'/index.html');
+	response.sendfile(__dirname+'/index1.html');
 });
 
 app.get('/weibo_login_home', function(request, response) {
